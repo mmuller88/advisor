@@ -48,15 +48,16 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: DrizzleAdapter(db, mysqlTable),
+  debug: process.env.NODE_ENV === 'development' ? true : false,
   providers: [
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
     //   clientSecret: env.DISCORD_CLIENT_SECRET,
-    // }),
+    // }),    
     CognitoProvider({
       clientId: env.COGNITO_CLIENT_ID,
       clientSecret: env.COGNITO_CLIENT_SECRET,
-      issuer: process.env.COGNITO_ISSUER,
+      issuer: env.COGNITO_ISSUER,
     }),
     /**
      * ...add more providers here.
